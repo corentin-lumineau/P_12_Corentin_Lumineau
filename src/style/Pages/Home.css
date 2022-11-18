@@ -1,0 +1,27 @@
+main {
+    width: 100%;
+    display: flex;
+}
+
+.main-wrapper {
+    width: 88%;
+}
+
+aside {
+    background: black;
+    width: 12%;
+    border: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+aside img {
+    width: 64px;
+}
+
+.main-title h1 {
+    display: flex;
+    gap: 20px;
+}
