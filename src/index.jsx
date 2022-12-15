@@ -5,15 +5,15 @@ import './index.css';
 
 import Home from './pages/Home';
 import Header from './components/Header';
+import Show from './pages/Show'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/show/:userId" element={<Show />}></Route>
       </Routes>
     </Router>
-  </React.StrictMode>
 );

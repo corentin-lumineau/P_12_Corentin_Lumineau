@@ -1,4 +1,13 @@
-.session-duration-chart {
+/* .session-duration-chart {
     width: 30%;
     height: 100%;
+} */
+
+.legend-wrapper-duration {
+    width: 50%;
+    font-size: 12px;
+    color: white;
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-left: 10px;
 }

@@ -26,6 +26,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 h1 {
@@ -40,5 +41,13 @@ p {
 
 .red-text {
   color: red;
+}
+
+.recharts-tooltip-wrapper:focus-visible  {
+  outline: none;
+}
+
+.bold {
+  font-weight: 800;
 }
  
