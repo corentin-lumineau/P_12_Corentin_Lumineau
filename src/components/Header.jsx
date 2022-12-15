@@ -1,10 +1,11 @@
 import logo from '../assets/logo_sport_see.png'
 import '../style/Components/Header.css'
+import { Link } from 'react-router-dom';
 
 function Header() {
     return(
         <header>
-            <img src={logo} alt="logo" />
+            <Link to="/"><img src={logo} alt="logo" /></Link>
             <nav>
                 <div className="nav-element">Accueil</div>
                 <div className="nav-element">Profil</div>

@@ -1,0 +1,47 @@
+.alimentation-card {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #FBFBFB;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+    
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.alimentation-card img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.picto-container {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.picto-container--red {
+    background: #FBEAEB;
+}
+
+.picto-container--blue {
+    background: #E9F4FB;
+}
+
+.picto-container--yellow {
+    background: #FBF6E5;
+}
+
+.picto-container--pink {
+    background: #FBEAEF;
+}
