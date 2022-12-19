@@ -1,26 +1,7 @@
 import { RadialBarChart, RadialBar, Tooltip, PolarAngleAxis, ResponsiveContainer } from "recharts"
 import "../style/Components/Score.css"
-import { useEffect, useState } from "react"
-import { fetchUserInformations } from "../services/UserServices"
 
-function Score({userId}) {
-
-    const [currentDayScore, setCurrentDayScore] = useState([])
-
-    useEffect(() => {
-       
-        fetchUserInformations(userId).then((({todayScore, score}) => {
-            if(todayScore !== undefined) {
-                setCurrentDayScore(todayScore)
-            }
-            else {
-                setCurrentDayScore(score)
-            }
-            
-        }))
-    }, [])
-
-   
+function Score({score}) {
   
     const CustomizedLabel = (data) => {
      return(
@@ -34,9 +15,9 @@ function Score({userId}) {
 
     return(
         <ResponsiveContainer width="32%" height={230}>
-            <RadialBarChart cx="50%" cy="50%" style={{ backgroundColor: "#FBFBFB" }} margin={{ top: 30, right: 30, bottom: 30, left: 30 }} innerRadius={100} outerRadius={75} barSize={10} data={currentDayScore} startAngle={90} endAngle={460}>
+            <RadialBarChart cx="50%" cy="50%" style={{ backgroundColor: "#FBFBFB" }} margin={{ top: 30, right: 30, bottom: 30, left: 30 }} innerRadius={100} outerRadius={75} barSize={10} data={score} startAngle={90} endAngle={460}>
                 <PolarAngleAxis type='number' domain={[0, 100]} angleAxisId={1} tick={false} />
-                <RadialBar background dataKey="uv" angleAxisId={1} cornerRadius="10" data={currentDayScore} label={<CustomizedLabel/>} />
+                <RadialBar background dataKey="uv" angleAxisId={1} cornerRadius="10" data={score} label={<CustomizedLabel/>} />
                 <Tooltip /> 
             </RadialBarChart>
         </ResponsiveContainer>

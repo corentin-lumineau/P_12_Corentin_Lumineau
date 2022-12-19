@@ -45,7 +45,7 @@ export default class Factory {
         const backgroundClass = ["red", "blue", "yellow", "pink"];
         const unit = ["kCal", "g", "g", "g"];
        
-        if(this._data.todayScore !== undefined) {
+        if(this._data.todayScore) {
             this._data.todayScore = [{"name": "score", "uv": this._data.todayScore * 100, "fill": "#E60001"}];
         }
         else {

@@ -10,7 +10,7 @@ function SessionDuration({userId}) {
 
     useEffect(() => {
         fetchSessionDuration(userId).then(({sessions}) => setSessionDurationData(sessions))
-    }, [])
+    }, [userId])
     
 
     const CustomTooltip = ({ active, payload }) => {
@@ -38,7 +38,7 @@ function SessionDuration({userId}) {
 
  
     return(
-        <ResponsiveContainer width="32%" height={230}>
+        <ResponsiveContainer width="32%" height="100%">
             <LineChart data={sessionDurationData} padding={{ top: 0, right: 0, left: 5, bottom: 0 }} id={'line-chart'}>
                 <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{fill: 'white', fontSize: 12, opacity: 0.5 }} />
                 <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />}/>
