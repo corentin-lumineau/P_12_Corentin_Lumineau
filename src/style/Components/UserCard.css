@@ -1,0 +1,16 @@
+.user-card {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    text-decoration: none;
+    color: red;
+    border-radius: 10px;
+}
+
+.user-card p {
+    font-size: 20px;
+    font-weight: 900;
+}

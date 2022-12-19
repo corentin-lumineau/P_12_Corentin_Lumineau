@@ -9,10 +9,33 @@ import TypeActivity from '../../components/TypeActivity'
 import Score from '../../components/Score'
 import Alimentation from '../../components/Alimentation'
 import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { fetchUserInformations } from '../../services/UserServices'
 
 function Show() {
 
+    const [currentDayScore, setCurrentDayScore] = useState([])
+    const [currentUser, setCurrentUser] = useState([])
+    const [keyData, setKeyData] = useState([])
+
+
     const { userId } = useParams()
+    
+    useEffect(() => {
+       
+        fetchUserInformations(userId).then((({todayScore, score, userInfos, keyData}) => {
+            if(todayScore) {
+                setCurrentDayScore(todayScore)
+            }
+            else {
+                setCurrentDayScore(score)
+            }
+            setCurrentUser(userInfos)
+            setKeyData(keyData)
+        }))
+    }, [userId])
+
+    
 
     return(
         <main>
@@ -26,7 +49,7 @@ function Show() {
                 <div className='main-title'>
                     <h1>
                         <p>Bonjour</p>
-                        <p className='red-text'>Thomas</p> 
+                        <p className='red-text'>{currentUser.firstName}</p> 
                     </h1>
                     <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
                 </div>
@@ -36,12 +59,10 @@ function Show() {
                         <div className='other-charts-container'>
                             <SessionDuration userId={userId}/>
                             <TypeActivity userId={userId}/>
-                            <Score userId={userId}/>
+                            <Score score={currentDayScore}/>
                         </div>
                     </div>
-                    
-                        <Alimentation userId={userId}/>
-                    
+                        <Alimentation alimentationData={keyData}/>
                 </div>
             </div>
         </main>

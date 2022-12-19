@@ -13,7 +13,7 @@ function TypeActivity({userId}) {
         fetchTypeActivityData(userId).then((response) => {
             setTypeActivityData(response)
         })
-    }, [])
+    }, [userId])
 
 
     return(
