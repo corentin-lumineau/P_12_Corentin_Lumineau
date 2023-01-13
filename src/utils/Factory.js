@@ -3,17 +3,38 @@ import PictoProteines from '../assets/pictoProteines.png';
 import PictoGlucides from '../assets/pictoGlucides.png';
 import PictoLipides from '../assets/pictoLipides.png';
 
+
+/** Class representing a Factory. This modelisation class take rough data from API to inject it into each charts components  */
 export default class Factory {
+
+    /**
+     * Create a Factory
+     * @constructor
+     * @param {object} data - The data value
+     */
+    
     constructor({data}) {
         this._data = data;
     }
+
+      /**
+     * Format the daily activity data to generate the DailyActivity component
+     * @returns the object containing formated data
+     */
 
     formatDailyActivity() {
         this._data.sessions.forEach((session, index) => {
             session.day = index + 1;
         })
+
+       
         return this._data;
     }
+
+     /**
+     * Format the session duration activity to generate SessionDuration component
+     * @returns the object containing formated data
+     */
 
     formatSessionDuration() {
         const days = ["L", "M", "M", "J", "V", "S", "D"];
@@ -21,8 +42,14 @@ export default class Factory {
         this._data.sessions.forEach((session, index) => {
             session.day = days[index];
         })
+
         return this._data;
     }
+
+    /**
+     * Format the type activity data to generate TypeActivity component
+     * @returns the object containing formated data
+     */
 
     formatTypeActivity() {
         let arrayOfKind = Object.values(this._data.kind);
@@ -38,6 +65,11 @@ export default class Factory {
         })
         return this._data;
     }
+
+     /**
+     * Format the user informtions to generate the Show component, the Score component and the AlimentationCard component
+     * @returns the object containing formated data
+     */
 
     formatUserInformations() {
         const dictionnary = ["Calories", "Proteines", "Glucides", "Lipides"];

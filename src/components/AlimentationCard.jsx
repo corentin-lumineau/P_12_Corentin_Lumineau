@@ -1,4 +1,12 @@
 import '../style/Components/AlimentationCard.css'
+import PropTypes from 'prop-types'
+
+/**
+ * Display an alimentation card with its name, value and style
+ * @component
+ * @param {object} dataAlimentationCard - The array wich contains all the alimentation data of the user
+ * @returns {JSX.Element} AlimentationCardComponent
+ */
 
 function AlimentationCard({dataAlimentationCard}) {
     return(
@@ -14,6 +22,10 @@ function AlimentationCard({dataAlimentationCard}) {
             
         </div>
     )
+}
+
+AlimentationCard.propTypes = {
+    dataAlimentationCard: PropTypes.object
 }
 
 export default AlimentationCard

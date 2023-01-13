@@ -4,6 +4,13 @@ import '../../style/Components/UserCard.css'
 
 import '../../style/Pages/Home.css'
 
+/**
+ * Display the homepage
+ * @component
+ * @returns {JSX.Element} Home component
+ */
+
+
 function Home() {
 
     return(

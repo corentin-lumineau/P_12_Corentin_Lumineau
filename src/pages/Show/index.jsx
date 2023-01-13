@@ -12,6 +12,13 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { fetchUserInformations } from '../../services/UserServices'
 
+/**
+ * Display the show for the selected user
+ * @component
+ * @returns {JSX.Element} Show component
+ */
+
+
 function Show() {
 
     const [currentDayScore, setCurrentDayScore] = useState([])
@@ -40,10 +47,15 @@ function Show() {
     return(
         <main>
             <aside>
-                <img src={icon1} alt='icon'></img>
-                <img src={icon2} alt='icon'></img>
-                <img src={icon3} alt='icon'></img>
-                <img src={icon4} alt='icon'></img>
+                <div className='icon-container'>
+                    <img src={icon1} alt='icon'></img>
+                    <img src={icon2} alt='icon'></img>
+                    <img src={icon3} alt='icon'></img>
+                    <img src={icon4} alt='icon'></img>
+                </div>
+                <div className='copiryght'>
+                    <p>Copyryght, SportSee 2020</p>
+                </div>
             </aside>
             <div className='main-wrapper'>
                 <div className='main-title'>
