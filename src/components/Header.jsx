@@ -2,6 +2,13 @@ import logo from '../assets/logo_sport_see.png'
 import '../style/Components/Header.css'
 import { Link } from 'react-router-dom';
 
+/**
+ * Display the header of the app
+ * @component
+ * @returns {JSX.Element} Header component
+ */
+
+
 function Header() {
     return(
         <header>

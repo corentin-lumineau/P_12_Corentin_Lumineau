@@ -19,8 +19,7 @@ aside {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
+    justify-content: space-evenly;
 }
 
 aside img {
@@ -30,7 +29,8 @@ aside img {
 .main-title {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    height: 15%;
+    justify-content: space-between;
 }
 
 .main-title h1 {
@@ -48,11 +48,13 @@ aside img {
 .stats-wrapper {
     display: flex;
     justify-content: space-between;
+    height: 80%;
 }
 
 .other-charts-container {
     display: flex;
     justify-content: space-between;
+    height: 50%;
 }
 
 
@@ -74,6 +76,13 @@ aside img {
 .legend-wrapper {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
+    font-weight: 600;
+    opacity: 0.6;
+}
+
+.legend-wrapper li:nth-child(even)::marker {
+    color: red;
 }
 
 .barchart-legend {
@@ -117,3 +126,21 @@ aside img {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.recharts-polar-angle-axis-tick-value {
+    transform: translateX(-3px);
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.copiryght {
+    color: white;
+    transform: rotate(-90deg);
+    font-size: 12px;
+    
+}
+

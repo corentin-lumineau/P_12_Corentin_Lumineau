@@ -7,6 +7,15 @@ import { Bar } from 'recharts'
 import { Legend } from 'recharts'
 import { fetchDailyActivity } from "../services/UserServices"
 import { useState } from "react"
+import PropTypes from 'prop-types'
+
+/**
+ * Display the barchart to illustrate the activity of the user for each day
+ * @component
+ * @param {string} userId - The id of the current user
+ * @returns {JSX.Element} DailyActivity component
+ */
+
 
 function DailyActivity({userId}) {
 
@@ -15,8 +24,16 @@ function DailyActivity({userId}) {
     useEffect(() => {
         fetchDailyActivity(userId).then(({sessions}) =>  {
             setDailyActivityData(sessions)
+            
         })
-    }, [])
+    }, [userId])
+   
+    /**
+     * Display a custom tooltip for the barchart
+     * @param {boolean} active - The boolean to determine if the tooltip mich be active or not
+     * @param {array} payload - The array wich contains the data to display in the tooltip
+     * @returns {JSX.Element} CustomTooltip component
+     */
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
@@ -30,36 +47,44 @@ function DailyActivity({userId}) {
         return null;
         };
 
-    const renderLegend = (props) => {
-        const { payload } = props;
-        
+     /**
+     * Display a custom legend for the barchart
+     * @param {object} props - The object wich contains all the datas of the chart
+     * @returns {JSX.Element} Custom legend component
+     */
+
+    const renderLegend = () => {
+     
         return (
             <div className="legend-wrapper">
                     <p>Activité quotidienne</p>
                 <ul className='barchart-legend'>
-                {
-                    payload.map((entry, index) => (
-                    <li key={`item-${index}`}>{entry.value}</li>
-                    ))
-                }
+                    <li>Poids(kg)</li>
+                    <li>Calories brulées(kCal)</li>
                 </ul>
             </div>
         );
         }
 
     return(
-        <ResponsiveContainer width="100%" height={250} >
-            <BarChart data={dailyActivityData} barGap={10} barCategoryGap={5} id={'bar-chart'} > 
-                <CartesianGrid strokeDasharray="2" vertical={false} />
+        <ResponsiveContainer width="100%" height="50%" >
+            <BarChart data={dailyActivityData} barGap={10} barCategoryGap={5} id={'bar-chart'} stackOffset="sign"> 
+                <CartesianGrid strokeDasharray="1 1" vertical={false} />
                 <XAxis dataKey="day" axisLine={false} tickLine={false} />
-                <YAxis orientation="right" axisLine={false} tickLine={false} />
+                <YAxis yAxisId={1} orientation="right" axisLine={false} tickLine={false} dataKey="kilogram" domain={['dataMin - 2', 'dataMax + 2']}  />
+                <YAxis yAxisId ={2} axisLine={false} tickLine={false} dataKey="calories" hide={true} />
+                
                 <Tooltip content={<CustomTooltip />}/>
                 <Legend verticalAlign="top" align="right" height={70} content={renderLegend}/>
-                <Bar dataKey="kilogram" fill="#282D30" barSize={10} radius={[10,10,0,0]}   />
-                <Bar dataKey="calories" fill="#E60000" barSize={10} radius={[10,10,0,0]}  />
+                <Bar yAxisId={1} dataKey="kilogram" fill="#282D30" barSize={10} radius={[10,10,0,0]}   />
+                <Bar yAxisId={2} dataKey="calories" fill="#E60000" barSize={10} radius={[10,10,0,0]}  />
             </BarChart>
         </ResponsiveContainer>
     )
+}
+
+DailyActivity.propTypes = {
+    userId: PropTypes.string 
 }
 
 export default DailyActivity
