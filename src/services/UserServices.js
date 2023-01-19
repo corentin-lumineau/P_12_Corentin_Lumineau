@@ -17,11 +17,27 @@ export async function fetchDailyActivity(userId) {
         const { data } = response.data;
 
         const formatData = new Factory({data}).formatDailyActivity()
-        
+
         return formatData;
     }
     catch(error) {
         return []
+    }
+}
+
+export async function fetchDailyActivityMocked(userId) {
+    try {
+       
+        const response = await axios.get(`../daily_activity.json`);
+        
+        const currentUserData = response.data.find(el => el.data.userId === parseInt(userId));
+        const formatData = new Factory(currentUserData).formatDailyActivity();
+      
+       
+        return formatData;
+    }
+    catch {
+
     }
 }
 
@@ -42,6 +58,22 @@ export async function fetchSessionDuration(userId) {
     }
     catch(error) {
         return []
+    }
+}
+
+export async function fetchSessionDurationMocked(userId) {
+    try {
+       
+        const response = await axios.get(`../sessions_duration.json`);
+        
+        const currentUserData = response.data.find(el => el.data.userId === parseInt(userId));
+        const formatData = new Factory(currentUserData).formatDailyActivity();
+      
+       
+        return formatData;
+    }
+    catch {
+
     }
 }
 
@@ -66,6 +98,22 @@ export async function fetchTypeActivityData(userId) {
     }
 }
 
+export async function fetchTypeActivityDataMocked(userId) {
+    try {
+       
+        const response = await axios.get(`../type_activity.json`);
+        
+        const currentUserData = response.data.find(el => el.data.userId === parseInt(userId));
+        const formatData = new Factory(currentUserData).formatTypeActivity();
+      
+       
+        return formatData;
+    }
+    catch {
+
+    }
+}
+
 /**
  * fetch all the informations related to the user
  * @async
@@ -79,10 +127,29 @@ export async function fetchUserInformations(userId) {
         const response = await axios.get(`http://localhost:3000/user/${userId}`);
         const { data } = response.data;
         const formatData = new Factory({data}).formatUserInformations();
-        
+       
         return formatData;
     }
     catch(error) {
         return []
     }
 }
+
+export async function fetchUserInformationsMocked(userId) {
+    try {
+       
+        const response = await axios.get(`../data_users.json`);
+        const currentUserData = response.data.find(el => el.data.id === parseInt(userId));
+        const formatData = new Factory(currentUserData).formatUserInformations();
+       
+        return formatData;
+    }
+    catch {
+
+    }
+}
+
+
+
+
+

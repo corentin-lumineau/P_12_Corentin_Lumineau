@@ -8,9 +8,9 @@ import SessionDuration from '../../components/SessionDuration'
 import TypeActivity from '../../components/TypeActivity'
 import Score from '../../components/Score'
 import Alimentation from '../../components/Alimentation'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { fetchUserInformations } from '../../services/UserServices'
+import { fetchUserInformations, fetchUserInformationsMocked } from '../../services/UserServices'
 
 /**
  * Display the show for the selected user
@@ -24,13 +24,30 @@ function Show() {
     const [currentDayScore, setCurrentDayScore] = useState([])
     const [currentUser, setCurrentUser] = useState([])
     const [keyData, setKeyData] = useState([])
-
+    const location = useLocation();
 
     const { userId } = useParams()
+
+  
+    
     
     useEffect(() => {
-       
-        fetchUserInformations(userId).then((({todayScore, score, userInfos, keyData}) => {
+        const { mockedVersion } = location.state
+        
+        if (mockedVersion === false) {
+            fetchUserInformations(userId).then((({todayScore, score, userInfos, keyData}) => {
+                if(todayScore) {
+                    setCurrentDayScore(todayScore)
+                }
+                else {
+                    setCurrentDayScore(score)
+                }
+                setCurrentUser(userInfos)
+                setKeyData(keyData)
+            }))
+       } else {
+
+        fetchUserInformationsMocked(userId).then((({todayScore, score, userInfos, keyData}) => {
             if(todayScore) {
                 setCurrentDayScore(todayScore)
             }
@@ -40,7 +57,10 @@ function Show() {
             setCurrentUser(userInfos)
             setKeyData(keyData)
         }))
-    }, [userId])
+
+       }
+  
+    }, [userId, location.state])
 
     
 

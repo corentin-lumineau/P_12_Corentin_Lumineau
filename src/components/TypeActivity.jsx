@@ -1,6 +1,7 @@
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts'
 import { useEffect, useState } from 'react'
-import { fetchTypeActivityData } from '../services/UserServices'
+import { useLocation } from 'react-router-dom'
+import { fetchTypeActivityData, fetchTypeActivityDataMocked } from '../services/UserServices'
 import PropTypes from 'prop-types'
 
 /**
@@ -13,12 +14,21 @@ import PropTypes from 'prop-types'
 function TypeActivity({userId}) {
 
     const [typeActivityData, setTypeActivityData] = useState([])
+    const location = useLocation();
+    const { mockedVersion } = location.state
 
     useEffect(() => {
-        fetchTypeActivityData(userId).then((response) => {
-            setTypeActivityData(response)
-        })
-    }, [userId])
+        if(mockedVersion === false) {
+            fetchTypeActivityData(userId).then((response) => {
+                setTypeActivityData(response)
+            })
+        } else {
+            fetchTypeActivityDataMocked(userId).then((response) => {
+                setTypeActivityData(response)
+            })
+        }
+       
+    }, [userId, mockedVersion])
 
 
 

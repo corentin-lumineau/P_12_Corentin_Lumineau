@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { LineChart, XAxis, Tooltip, Line, Rectangle, Legend, ResponsiveContainer  } from "recharts"
-import { fetchSessionDuration } from "../services/UserServices";
+import { fetchSessionDuration, fetchSessionDurationMocked } from "../services/UserServices";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom'
 import '../style/Components/SessionDuration.css'
 import PropTypes from 'prop-types'
 
@@ -15,10 +16,17 @@ import PropTypes from 'prop-types'
 function SessionDuration({userId}) {
 
     const [sessionDurationData, setSessionDurationData] = useState([])
+    const location = useLocation();
+    const { mockedVersion } = location.state
 
     useEffect(() => {
-        fetchSessionDuration(userId).then(({sessions}) => setSessionDurationData(sessions))
-    }, [userId])
+        if(mockedVersion === false) {
+            fetchSessionDuration(userId).then(({sessions}) => setSessionDurationData(sessions))
+        } else {
+            fetchSessionDurationMocked(userId).then(({sessions}) => setSessionDurationData(sessions))
+        }
+        
+    }, [userId, mockedVersion])
     
 
     /**
