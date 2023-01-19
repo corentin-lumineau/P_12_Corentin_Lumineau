@@ -5,7 +5,8 @@ import { XAxis, YAxis } from 'recharts'
 import { Tooltip } from 'recharts'
 import { Bar } from 'recharts'
 import { Legend } from 'recharts'
-import { fetchDailyActivity } from "../services/UserServices"
+import { fetchDailyActivity, fetchDailyActivityMocked } from "../services/UserServices"
+import { useLocation } from 'react-router-dom'
 import { useState } from "react"
 import PropTypes from 'prop-types'
 
@@ -20,13 +21,22 @@ import PropTypes from 'prop-types'
 function DailyActivity({userId}) {
 
     const [dailyActivityData, setDailyActivityData] = useState([]);
+    const location = useLocation();
+    const { mockedVersion } = location.state
 
     useEffect(() => {
-        fetchDailyActivity(userId).then(({sessions}) =>  {
-            setDailyActivityData(sessions)
-            
-        })
-    }, [userId])
+        if (mockedVersion === false) {
+            fetchDailyActivity(userId).then(({sessions}) =>  {
+                setDailyActivityData(sessions)
+                
+            })
+        } else {
+            fetchDailyActivityMocked(userId).then(({sessions}) => {
+                setDailyActivityData(sessions)
+            })
+        }
+      
+    }, [userId, mockedVersion])
    
     /**
      * Display a custom tooltip for the barchart

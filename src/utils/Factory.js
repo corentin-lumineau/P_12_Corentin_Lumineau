@@ -14,6 +14,7 @@ export default class Factory {
      */
     
     constructor({data}) {
+      
         this._data = data;
     }
 
@@ -25,9 +26,8 @@ export default class Factory {
     formatDailyActivity() {
         this._data.sessions.forEach((session, index) => {
             session.day = index + 1;
-        })
+        });
 
-       
         return this._data;
     }
 
@@ -41,7 +41,7 @@ export default class Factory {
 
         this._data.sessions.forEach((session, index) => {
             session.day = days[index];
-        })
+        });
 
         return this._data;
     }
@@ -58,11 +58,11 @@ export default class Factory {
 
         arrayOfKind.forEach((el, index) => {
             arrayOfKind[index] = dictionnary[index];
-        })
+        });
        
         this._data.data.forEach((item, index) => {
             item.kind = arrayOfKind[index]
-        })
+        });
         return this._data;
     }
 
@@ -89,13 +89,13 @@ export default class Factory {
         const newArray = []
         array.forEach((el) => {
             newArray.push(Object.assign({}, el));
-        })
+        });
         newArray.forEach((el, index) => {
             el[Object.keys(el)[0]] = dictionnary[index];
             el.picto = picto[index];
             el.background = backgroundClass[index];
             el.unit = unit[index]
-        })
+        });
         this._data.keyData = newArray;
         return this._data;
     }
